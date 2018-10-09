@@ -8,6 +8,7 @@ import org.testng.annotations.DataProvider;
 
 public class TestRunnerBase {
     public ExtentReports reports;
+    private boolean replaceExistingReport = true;
 
     @DataProvider(name = "GenerateTestCase")
     public Object[][] generateTest(){
@@ -23,7 +24,7 @@ public class TestRunnerBase {
 
     @BeforeSuite
     public void beforeSuite(){
-        reports = new ExtentReports(getExtentReportsFilePath(), true);
+        reports = new ExtentReports(getExtentReportsFilePath(), replaceExistingReport);
     }
 
     @BeforeClass

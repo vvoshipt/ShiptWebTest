@@ -7,8 +7,6 @@ import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.asserts.Assertion;
 import org.testng.asserts.SoftAssert;
 
 import java.text.SimpleDateFormat;
@@ -23,6 +21,7 @@ public class TestCase {
 
     public TestCase(String url) {
         this.browser = getLocalDriver();
+        browser.manage().window().maximize();
         this.url = url;
     }
 
@@ -62,7 +61,7 @@ public class TestCase {
     }
 
     public void assertEquals(Object first, Object second, String message){
-        String details = "Asserting {" + first.toString() + "} is equal to {" + second.toString() + "}";
+        String details =  "<br />"+message + "<br />Asserting {" + first.toString() + "} is equal to {" + second.toString() + "}";
 
         if(first.equals(second)){
             logPass("PASS: " + details);
@@ -72,12 +71,12 @@ public class TestCase {
         softAssertion.assertEquals(first, second, message);
     }
 
-    public void logPass(String message){
+    private void logPass(String message){
         syso(message);
         test.log(LogStatus.PASS, message);
     }
 
-    public void logError(String message){
+    private void logError(String message){
         syso(message);
         test.log(LogStatus.ERROR, message);
     }

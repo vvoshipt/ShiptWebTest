@@ -21,3 +21,7 @@ $RECYCLE.BIN/
 # =========================
 # Operating System Files
 # =========================
+*.lock
+.gradle/3.3/taskArtifacts/fileHashes.bin
+*.bin
+*.xml
