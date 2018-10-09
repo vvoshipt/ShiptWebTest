@@ -24,11 +24,13 @@ public class LoginTest extends TestRunnerBase {
             LoginPage.waitForLoginPage(browser);
 
             //assert Labels
+            testCase.logInfo("Asserting Labels for Log In Page");
             testCase.assertEquals(LoginPage.loginTitle(browser).getText(), "Log In", "Asserting if we are on the Log In Page");
             testCase.assertEquals(LoginPage.createAccountLink(browser).getText(), "Create account", "Asserting Create Account Link Exists and is Labeled Correctly");
             testCase.assertEquals(LoginPage.forgotPasswordLink(browser).getText(), "Forgot password?", "Asserting Forgot Password Link Exists and is Labeled Correctly");
 
             //Attempt Login with negative and happy path
+            testCase.logInfo("Asserting Login Functionality");
             attemptLogin("badUser@gmail.com", "badPassword", browser);
             testCase.assertEquals(LoginPage.errorMessage(browser).getText(), "Invalid Username or Password", "Assert Login Error when Invalid User or Invalid Password");
             attemptLogin("ValidUser@gmail.com", "badPassword", browser);
@@ -47,8 +49,10 @@ public class LoginTest extends TestRunnerBase {
             //Assert we Logged out
 
             //Assert function for Forgot Password with and without valid user
+            testCase.logInfo("Asserting Forgot Password");
 
             //Test Links Relative to Login page
+            testCase.logInfo("Asserting Shipt Logo Link");
             LoginPage.shiptLogoLink(browser).click();
             LoginPage.waitForLoginPage(browser);
             testCase.assertEquals(LoginPage.loginTitle(browser).getText(), "Log In", "Asserting Ship Logo in Log In takes us back to Log In");
