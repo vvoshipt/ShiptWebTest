@@ -1,5 +1,6 @@
 package PageElements;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,4 +42,7 @@ public class LoginPage {
         return driver.findElement(By.xpath("//h1[@class='title-3 near-black']"));
     }
 
+    public static WebElement forgotPasswordLink(WebDriver driver) {
+        return driver.findElement(By.xpath("//a[@class='curacao link semibold']"));
+    }
 }

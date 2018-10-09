@@ -22,10 +22,13 @@ public class LoginTest extends TestRunnerBase {
             //Go to Login
             HomePage.loginButton(browser).click();
             LoginPage.waitForLoginPage(browser);
+
+            //assert Labels
             testCase.assertEquals(LoginPage.loginTitle(browser).getText(), "Log In", "Asserting if we are on the Log In Page");
             testCase.assertEquals(LoginPage.createAccountLink(browser).getText(), "Create account", "Asserting Create Account Link Exists and is Labeled Correctly");
+            testCase.assertEquals(LoginPage.forgotPasswordLink(browser).getText(), "Forgot password?", "Asserting Forgot Password Link Exists and is Labeled Correctly");
 
-            //Attempt Login with invalid user and Password
+            //Attempt Login with negative and happy path
             attemptLogin("badUser@gmail.com", "badPassword", browser);
             testCase.assertEquals(LoginPage.errorMessage(browser).getText(), "Invalid Username or Password", "Assert Login Error when Invalid User or Invalid Password");
             attemptLogin("ValidUser@gmail.com", "badPassword", browser);
@@ -41,14 +44,14 @@ public class LoginTest extends TestRunnerBase {
             //logout
             //HomePage.loginButton(browser).click();
             //LoginPage.waitForLoginPage(browser);
+            //Assert we Logged out
 
-            //Test workflow of Shipt logo to go to home page and come back to login page
+            //Assert function for Forgot Password with and without valid user
+
+            //Test Links Relative to Login page
             LoginPage.shiptLogoLink(browser).click();
-            HomePage.waitForHomePage(browser);
-            testCase.assertEquals(LoginPage.loginTitle(browser).getText(), "Log In", "Asserting Ship Logo in Log In takes us back to ");
-            HomePage.loginButton(browser).click();
             LoginPage.waitForLoginPage(browser);
-
+            testCase.assertEquals(LoginPage.loginTitle(browser).getText(), "Log In", "Asserting Ship Logo in Log In takes us back to Log In");
 
             testCase.endTest();
         }catch (Exception e) {
