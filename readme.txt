@@ -20,6 +20,8 @@ HOW TO RUN:
         be switched to append instead of replacing the file with a true/false tag in
         'src\test\java\TestNG\TestRunnerBase.java';
 
+    NOTE: Test fails on purpose to show extent reports and how it handles Errors.  
+
 Project Details:
     -TestNg is used to drive the test as a Data Driven Test where it will Create TestCase Objects
         and pass those as arguments for the tests to Run.
