@@ -57,6 +57,9 @@ public class LoginTest extends TestRunnerBase {
             LoginPage.waitForLoginPage(browser);
             testCase.assertEquals(LoginPage.loginTitle(browser).getText(), "Log In", "Asserting Ship Logo in Log In takes us back to Log In");
 
+            //Failing on purpose to show failing scenario
+            testCase.assertEquals(true, false, "Failed on Purpose");
+
             testCase.endTest();
         }catch (Exception e) {
             testCase.logFatal(e.getMessage());

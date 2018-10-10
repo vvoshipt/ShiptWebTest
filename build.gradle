@@ -20,3 +20,10 @@ dependencies {
 
     compile group: 'com.relevantcodes', name: 'extentreports', version: '2.41.1'
 }
+
+test { //this is the gradle task to be executed
+    useTestNG() { //Tells Gradle to use TestNG
+        useDefaultListeners = true // Tells TestNG to execute its default reporting structure
+        suites 'src/test/java/XML/suite.xml' //location of our suite.xml
+    }
+}

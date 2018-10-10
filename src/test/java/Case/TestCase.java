@@ -5,15 +5,22 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.asserts.SoftAssert;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 public class TestCase {
-    private WebDriver browser;
+    private RemoteWebDriver browser;
     private String url;
     public ExtentTest test;
     public SoftAssert softAssertion = new SoftAssert();
@@ -44,7 +51,7 @@ public class TestCase {
     }
 
 
-    private WebDriver getLocalDriver() {
+    private RemoteWebDriver getLocalDriver() {
         WebDriverManager.getInstance(DriverManagerType.CHROME).setup();
         return new ChromeDriver();
     }
@@ -60,7 +67,7 @@ public class TestCase {
         softAssertion.fail("FATAL ERROR OCCURED: \n " + message);
     }
 
-    public void assertEquals(Object first, Object second, String message){
+    public void assertEquals(Object first, Object second, String message) throws IOException {
         String details =  "<br />"+message + "<br />Asserting {" + first.toString() + "} is equal to {" + second.toString() + "}";
 
         if(first.equals(second)){
@@ -76,9 +83,24 @@ public class TestCase {
         test.log(LogStatus.PASS, message);
     }
 
-    private void logError(String message){
+    private void logError(String message) throws IOException {
         syso(message);
-        test.log(LogStatus.ERROR, message);
+        String screenShotFilePath = takeScreenShot(getScreenshotName());
+        test.log(LogStatus.ERROR, message + test.addScreenCapture(screenShotFilePath));
+    }
+
+    public String getScreenshotName(){
+        return new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())+"_"+UUID.randomUUID()+".png";
+    }
+
+    public String takeScreenShot(String screenShotName) throws IOException {
+        screenShotName = screenShotName.replaceAll("/", "_");
+        syso("OutputType.FILE: " + OutputType.FILE.toString());
+        File scrFile = browser.getScreenshotAs(OutputType.FILE);
+        //The below method will save the screen shot in d drive with name "screenshot.png"
+        String filePath = System.getProperty("user.dir") + "/ExtentReport/"+ screenShotName;
+        FileUtils.copyFile(scrFile, new File(filePath));
+        return filePath;
     }
 
     private void syso(String message){

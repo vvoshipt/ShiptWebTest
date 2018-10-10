@@ -4,13 +4,16 @@ HOW TO RUN:
         link - https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
     Install IntelliJ
         link - https://www.jetbrains.com/idea/download/#section=windows
-    Install Gradle
-        link - https://gradle.org/install/
+    Install Gradle Wrapper
+        link - https://gradle.org/install/#with-the-gradle-wrapper
 
     Open the Project in IntelliJ and turn on the option for Auto Download Dependencies and wait
         for gradle dependencies to install.
     Right click '\src\test\java\LoginTest.java' in project window to run the test. A browser should
         pop up and perform the test.
+
+    Alternatively you can run the test from terminal when you cd to the project and run
+    './gradlew build' and './gradlew test'.
 
     Results can be found in console logs and in Extent Reports as an HTML link
         'src\test\resources\WebTestReport.html'. Extent reports only holds one run for now but can
