@@ -13,14 +13,14 @@ HOW TO RUN:
         pop up and perform the test.
 
     Alternatively you can run the test from terminal when you cd to the project and run
-    './gradlew build' and './gradlew test'.
+    './gradlew build' and './gradlew test' or 'gradle test'.
 
     Results can be found in console logs and in Extent Reports as an HTML link
         'src\test\resources\WebTestReport.html'. Extent reports only holds one run for now but can
         be switched to append instead of replacing the file with a true/false tag in
         'src\test\java\TestNG\TestRunnerBase.java';
 
-    NOTE: Test fails on purpose to show extent reports and how it handles Errors.  
+    NOTE: Test fails on purpose to show extent reports and how it handles Errors.
 
 Project Details:
     -TestNg is used to drive the test as a Data Driven Test where it will Create TestCase Objects
